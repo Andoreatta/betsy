@@ -1,0 +1,5 @@
+defmodule BetsyWeb.UserRegistrationHTML do
+  use BetsyWeb, :html
+
+  embed_templates "user_registration_html/*"
+end
