@@ -1,7 +1,9 @@
 import Config
 
 # Only in tests, remove the complexity from the password hashing algorithm
-config :pbkdf2_elixir, :rounds, 1
+config :argon2_elixir,
+  t_cost: 1,
+  m_cost: 8
 
 # Configure your database
 #
