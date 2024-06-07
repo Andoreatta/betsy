@@ -6,12 +6,15 @@ defmodule Betsy.Repo.Migrations.CreateUsersAuthTables do
 
     create table(:users) do
       add :email, :citext, null: false
+      add :username, :citext, null: false
       add :hashed_password, :string, null: false
       add :confirmed_at, :naive_datetime
+      add :permissions, :jsonb, null: false, default: "{}"
       timestamps(type: :utc_datetime)
     end
 
     create unique_index(:users, [:email])
+    create unique_index(:users, [:username])
 
     create table(:users_tokens) do
       add :user_id, references(:users, on_delete: :delete_all), null: false
