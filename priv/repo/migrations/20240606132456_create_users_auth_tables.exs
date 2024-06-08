@@ -5,11 +5,14 @@ defmodule Betsy.Repo.Migrations.CreateUsersAuthTables do
     execute "CREATE EXTENSION IF NOT EXISTS citext", ""
 
     create table(:users) do
-      add :email, :citext, null: false
+      add :email, :citext
       add :username, :citext, null: false
       add :hashed_password, :string, null: false
       add :confirmed_at, :naive_datetime
-      add :permissions, :jsonb, null: false, default: "{}"
+      add :role, :string, null: false, default: "user"
+      add :permissions, :jsonb, null: false, default: ~s'{
+        "boards": {}
+      }'
       timestamps(type: :utc_datetime)
     end
 

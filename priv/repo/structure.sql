@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.3
--- Dumped by pg_dump version 16.3
+-- Dumped from database version 16.1
+-- Dumped by pg_dump version 16.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -53,7 +53,6 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.boards (
-    id bigint NOT NULL,
     board_uri character varying(32) NOT NULL,
     title character varying(64) NOT NULL,
     description text,
@@ -72,30 +71,10 @@ CREATE TABLE public.boards (
 
 
 --
--- Name: boards_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.boards_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: boards_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.boards_id_seq OWNED BY public.boards.id;
-
-
---
 -- Name: posts; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.posts (
-    id bigint NOT NULL,
     board_uri character varying(255),
     post_uuid uuid DEFAULT gen_random_uuid() NOT NULL,
     reply_to_post_uuid uuid,
@@ -103,7 +82,7 @@ CREATE TABLE public.posts (
     ipv6_address inet,
     poster_name character varying(32),
     subject character varying(64),
-    body text NOT NULL,
+    body character varying(16384) NOT NULL,
     is_sage boolean DEFAULT false NOT NULL,
     is_sticky boolean DEFAULT false NOT NULL,
     is_locked boolean DEFAULT false NOT NULL,
@@ -111,25 +90,6 @@ CREATE TABLE public.posts (
     inserted_at timestamp(0) without time zone NOT NULL,
     updated_at timestamp(0) without time zone NOT NULL
 );
-
-
---
--- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.posts_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.posts_id_seq OWNED BY public.posts.id;
 
 
 --
@@ -211,20 +171,6 @@ ALTER SEQUENCE public.users_tokens_id_seq OWNED BY public.users_tokens.id;
 
 
 --
--- Name: boards id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.boards ALTER COLUMN id SET DEFAULT nextval('public.boards_id_seq'::regclass);
-
-
---
--- Name: posts id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.posts ALTER COLUMN id SET DEFAULT nextval('public.posts_id_seq'::regclass);
-
-
---
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -243,7 +189,7 @@ ALTER TABLE ONLY public.users_tokens ALTER COLUMN id SET DEFAULT nextval('public
 --
 
 ALTER TABLE ONLY public.boards
-    ADD CONSTRAINT boards_pkey PRIMARY KEY (id, board_uri);
+    ADD CONSTRAINT boards_pkey PRIMARY KEY (board_uri);
 
 
 --
@@ -251,7 +197,7 @@ ALTER TABLE ONLY public.boards
 --
 
 ALTER TABLE ONLY public.posts
-    ADD CONSTRAINT posts_pkey PRIMARY KEY (id, post_uuid);
+    ADD CONSTRAINT posts_pkey PRIMARY KEY (post_uuid);
 
 
 --
