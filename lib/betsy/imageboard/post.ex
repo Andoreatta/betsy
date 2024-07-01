@@ -1,7 +1,4 @@
-defmodule Betsy.Post do
-  @moduledoc """
-  This module represents a Post in the Betsy Imageboard.
-  """
+defmodule Betsy.Imageboard.Post do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -19,7 +16,7 @@ defmodule Betsy.Post do
     field :is_banned, :boolean, default: false
     timestamps(type: :utc_datetime)
 
-    belongs_to :board, Betsy.Board, foreign_key: :board_uri, type: :string
+    belongs_to :board, Betsy.Imageboard.Board, foreign_key: :board_uri, type: :string
   end
 
   @doc false

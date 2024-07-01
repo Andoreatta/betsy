@@ -1,0 +1,33 @@
+<.header>
+  Listing Boards
+  <:actions>
+    <.link href={~p"/boards/new"}>
+      <.button>New Board</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="boards" rows={@boards} row_click={&JS.navigate(~p"/boards/#{&1}")}>
+  <:col :let={board} label="Board uri"><%= board.board_uri %></:col>
+  <:col :let={board} label="Title"><%= board.title %></:col>
+  <:col :let={board} label="Description"><%= board.description %></:col>
+  <:col :let={board} label="Rules"><%= board.rules %></:col>
+  <:col :let={board} label="Enable names"><%= board.enable_names %></:col>
+  <:col :let={board} label="Is nsfw"><%= board.is_nsfw %></:col>
+  <:col :let={board} label="Is locked"><%= board.is_locked %></:col>
+  <:col :let={board} label="Is hidden"><%= board.is_hidden %></:col>
+  <:col :let={board} label="Bump limit"><%= board.bump_limit %></:col>
+  <:col :let={board} label="Total posts"><%= board.total_posts %></:col>
+  <:col :let={board} label="Moderators"><%= board.moderators %></:col>
+  <:action :let={board}>
+    <div class="sr-only">
+      <.link navigate={~p"/boards/#{board}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/boards/#{board}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={board}>
+    <.link href={~p"/boards/#{board}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

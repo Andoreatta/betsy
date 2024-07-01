@@ -1,7 +1,4 @@
 defmodule Betsy.Imageboard.Board do
-  @moduledoc """
-  This module represents a Board in the Betsy Imageboard.
-  """
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -19,11 +16,12 @@ defmodule Betsy.Imageboard.Board do
     field :total_posts, :integer, default: 0
     field :moderators, {:array, :string}
     timestamps(type: :utc_datetime)
-    has_many :posts, Betsy.Post, foreign_key: :board_uri
+
+    has_many :posts, Betsy.Imageboard.Post, foreign_key: :board_uri
   end
 
   @doc false
-  def changeset(board, attrs) do
+  defp changeset(board, attrs) do
     board
     |> cast(attrs, [
       :board_uri,
@@ -39,6 +37,10 @@ defmodule Betsy.Imageboard.Board do
       :total_posts,
       :moderators
     ])
-    |> validate_required([:board_uri, :title])
+    |> validate_required([:board_uri, :title, :owner_id])
+    |> validate_length(:board_uri, min: 3, max: 32)
+    |> validate_length(:title, min: 3, max: 32)
+    |> validate_length(:description, max: 128)
+    |> validate_length(:rules, max: 512)
   end
 end

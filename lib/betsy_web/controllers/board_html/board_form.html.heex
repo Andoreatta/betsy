@@ -1,0 +1,25 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:board_uri]} type="text" label="Board uri" />
+  <.input field={f[:title]} type="text" label="Title" />
+  <.input field={f[:description]} type="text" label="Description" />
+  <.input field={f[:rules]} type="text" label="Rules" />
+  <.input field={f[:enable_names]} type="checkbox" label="Enable names" />
+  <.input field={f[:is_nsfw]} type="checkbox" label="Is nsfw" />
+  <.input field={f[:is_locked]} type="checkbox" label="Is locked" />
+  <.input field={f[:is_hidden]} type="checkbox" label="Is hidden" />
+  <.input field={f[:bump_limit]} type="number" label="Bump limit" />
+  <.input field={f[:total_posts]} type="number" label="Total posts" />
+  <.input
+    field={f[:moderators]}
+    type="select"
+    multiple
+    label="Moderators"
+    options={[{"Option 1", "option1"}, {"Option 2", "option2"}]}
+  />
+  <:actions>
+    <.button>Save Board</.button>
+  </:actions>
+</.simple_form>

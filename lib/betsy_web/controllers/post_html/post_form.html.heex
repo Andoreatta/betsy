@@ -1,0 +1,19 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:post_uuid]} type="text" label="Post uuid" />
+  <.input field={f[:reply_to_post_uuid]} type="text" label="Reply to post uuid" />
+  <.input field={f[:ipv4_address]} type="text" label="Ipv4 address" />
+  <.input field={f[:ipv6_address]} type="text" label="Ipv6 address" />
+  <.input field={f[:poster_name]} type="text" label="Poster name" />
+  <.input field={f[:subject]} type="text" label="Subject" />
+  <.input field={f[:body]} type="text" label="Body" />
+  <.input field={f[:is_sage]} type="checkbox" label="Is sage" />
+  <.input field={f[:is_sticky]} type="checkbox" label="Is sticky" />
+  <.input field={f[:is_locked]} type="checkbox" label="Is locked" />
+  <.input field={f[:is_banned]} type="checkbox" label="Is banned" />
+  <:actions>
+    <.button>Save Post</.button>
+  </:actions>
+</.simple_form>

@@ -9,10 +9,10 @@
       for an account now.
     </:subtitle>
   </.header>
-
+  
   <.simple_form :let={f} for={@conn.params["user"]} as={:user} action={~p"/users/log_in"}>
     <.error :if={@error_message}><%= @error_message %></.error>
-    <.input field={f[:email_or_username]} label="Email or username" required />
+     <.input field={f[:email_or_username]} label="Email or username" required />
     <.input field={f[:password]} type="password" label="Password" required />
     <:actions :let={f}>
       <.input field={f[:remember_me]} type="checkbox" label="Keep me logged in" />
@@ -20,7 +20,7 @@
         Forgot your password?
       </.link>
     </:actions>
-
+    
     <:actions>
       <.button phx-disable-with="Logging in..." class="w-full">
         Log in <span aria-hidden="true">→</span>

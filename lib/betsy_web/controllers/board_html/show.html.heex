@@ -1,0 +1,25 @@
+<.header>
+  Board <%= @board.id %>
+  <:subtitle>This is a board record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/boards/#{@board}/edit"}>
+      <.button>Edit board</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Board uri"><%= @board.board_uri %></:item>
+  <:item title="Title"><%= @board.title %></:item>
+  <:item title="Description"><%= @board.description %></:item>
+  <:item title="Rules"><%= @board.rules %></:item>
+  <:item title="Enable names"><%= @board.enable_names %></:item>
+  <:item title="Is nsfw"><%= @board.is_nsfw %></:item>
+  <:item title="Is locked"><%= @board.is_locked %></:item>
+  <:item title="Is hidden"><%= @board.is_hidden %></:item>
+  <:item title="Bump limit"><%= @board.bump_limit %></:item>
+  <:item title="Total posts"><%= @board.total_posts %></:item>
+  <:item title="Moderators"><%= @board.moderators %></:item>
+</.list>
+
+<.back navigate={~p"/boards"}>Back to boards</.back>

@@ -35,6 +35,7 @@ defmodule Betsy.Accounts.User do
       submitting the form), this option can be set to `false`.
       Defaults to `true`.
   """
+
   def registration_changeset(user, attrs, opts \\ []) do
     user
     |> cast(attrs, [:email, :username, :password])

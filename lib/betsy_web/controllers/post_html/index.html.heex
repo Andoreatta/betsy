@@ -1,0 +1,33 @@
+<.header>
+  Listing Posts
+  <:actions>
+    <.link href={~p"/posts/new"}>
+      <.button>New Post</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="posts" rows={@posts} row_click={&JS.navigate(~p"/posts/#{&1}")}>
+  <:col :let={post} label="Post uuid"><%= post.post_uuid %></:col>
+  <:col :let={post} label="Reply to post uuid"><%= post.reply_to_post_uuid %></:col>
+  <:col :let={post} label="Ipv4 address"><%= post.ipv4_address %></:col>
+  <:col :let={post} label="Ipv6 address"><%= post.ipv6_address %></:col>
+  <:col :let={post} label="Poster name"><%= post.poster_name %></:col>
+  <:col :let={post} label="Subject"><%= post.subject %></:col>
+  <:col :let={post} label="Body"><%= post.body %></:col>
+  <:col :let={post} label="Is sage"><%= post.is_sage %></:col>
+  <:col :let={post} label="Is sticky"><%= post.is_sticky %></:col>
+  <:col :let={post} label="Is locked"><%= post.is_locked %></:col>
+  <:col :let={post} label="Is banned"><%= post.is_banned %></:col>
+  <:action :let={post}>
+    <div class="sr-only">
+      <.link navigate={~p"/posts/#{post}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/posts/#{post}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={post}>
+    <.link href={~p"/posts/#{post}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

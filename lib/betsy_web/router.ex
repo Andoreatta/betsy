@@ -77,4 +77,15 @@ defmodule BetsyWeb.Router do
     get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
   end
+
+  ## Board and posts/threads routes
+
+  scope "/", BetsyWeb do
+    pipe_through [:browser]
+
+    get "/boards", BoardController, :index
+    get "/:board_uri", BoardController, :show
+    post "/:board_uri/new_thread", PostController, :create
+    get "/:board_uri/:thread_id", PostController, :show
+  end
 end

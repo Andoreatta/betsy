@@ -1,0 +1,25 @@
+<.header>
+  Post <%= @post.id %>
+  <:subtitle>This is a post record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/posts/#{@post}/edit"}>
+      <.button>Edit post</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Post uuid"><%= @post.post_uuid %></:item>
+  <:item title="Reply to post uuid"><%= @post.reply_to_post_uuid %></:item>
+  <:item title="Ipv4 address"><%= @post.ipv4_address %></:item>
+  <:item title="Ipv6 address"><%= @post.ipv6_address %></:item>
+  <:item title="Poster name"><%= @post.poster_name %></:item>
+  <:item title="Subject"><%= @post.subject %></:item>
+  <:item title="Body"><%= @post.body %></:item>
+  <:item title="Is sage"><%= @post.is_sage %></:item>
+  <:item title="Is sticky"><%= @post.is_sticky %></:item>
+  <:item title="Is locked"><%= @post.is_locked %></:item>
+  <:item title="Is banned"><%= @post.is_banned %></:item>
+</.list>
+
+<.back navigate={~p"/posts"}>Back to posts</.back>
